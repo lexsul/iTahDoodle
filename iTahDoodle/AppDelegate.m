@@ -30,6 +30,8 @@ NSString *docPath()
   
   CGRect windowsFrame = [[UIScreen mainScreen] bounds];
   UIWindow *theWindow = [[UIWindow alloc] initWithFrame:windowsFrame];
+  initalViewController = [[UIViewController alloc] init];
+  [theWindow setRootViewController:initalViewController];
   [self setWindow:theWindow];
   
   CGRect tableFrame = CGRectMake(0, 80, 320, 380);

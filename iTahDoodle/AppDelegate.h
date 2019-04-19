@@ -10,6 +10,7 @@
 NSString *docPath(void);
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
+  UIViewController *initalViewController;
   UITableView *taskTable;
   UITextField *taskField;
   UIButton *insertButton;
