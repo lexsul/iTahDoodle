@@ -13,9 +13,7 @@ NSString *docPath()
   return [[pathList objectAtIndex:0] stringByAppendingPathComponent:@"data.td"];
 }
 
-
-
-@interface AppDelegate ()
+@interface AppDelegate()
 
 @end
 
@@ -32,6 +30,7 @@ NSString *docPath()
   
   CGRect windowsFrame = [[UIScreen mainScreen] bounds];
   UIWindow *theWindow = [[UIWindow alloc] initWithFrame:windowsFrame];
+  [self setWindow:theWindow];
   
   CGRect tableFrame = CGRectMake(0, 80, 320, 380);
   CGRect fieldFrame = CGRectMake(20, 40, 200, 31);
