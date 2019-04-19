@@ -6,7 +6,6 @@
 //  Copyright © 2019 alex. All rights reserved.
 //
 //
-//
 
 #import <UIKit/UIKit.h>
 NSString *docPath(void);
