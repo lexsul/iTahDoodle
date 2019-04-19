@@ -26,6 +26,11 @@ NSString *docPath()
     tasks = [plist mutableCopy];
   } else {
     tasks = [[NSMutableArray alloc] init];
+    if ([tasks count] ==0) {
+      [tasks addObject:@"Walk the dogs"];
+      [tasks addObject:@"Feed the hogs"];
+      [tasks addObject:@"Chops the logs"];
+    }
   }
   
   CGRect windowsFrame = [[UIScreen mainScreen] bounds];
@@ -41,6 +46,7 @@ NSString *docPath()
   taskTable = [[UITableView alloc] initWithFrame:tableFrame
                                            style:UITableViewStylePlain];
   [taskTable setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+  [taskTable setDataSource:self];
   
   
   taskField = [[UITextField alloc] initWithFrame:fieldFrame];
@@ -94,5 +100,19 @@ NSString *docPath()
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+  UITableViewCell *c = [taskTable dequeueReusableCellWithIdentifier:@"Cell"];
+  if (!c) {
+    c = [[UITableViewCell alloc] initWithStyle:(UITableViewCellStyleDefault) reuseIdentifier:@"Cell"];
+  }
+  NSString *item = [tasks objectAtIndex:[indexPath row]];
+  [[c textLabel] setText:item];
+  return c;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+  return [tasks count];
+}
 
 @end

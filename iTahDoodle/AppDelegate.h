@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 NSString *docPath(void);
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, UITableViewDataSource>
 {
   UIViewController *initalViewController;
   UITableView *taskTable;
