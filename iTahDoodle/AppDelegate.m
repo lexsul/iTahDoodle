@@ -36,6 +36,7 @@ NSString *docPath()
   CGRect windowsFrame = [[UIScreen mainScreen] bounds];
   UIWindow *theWindow = [[UIWindow alloc] initWithFrame:windowsFrame];
   initalViewController = [[UIViewController alloc] init];
+  [theWindow setUserInteractionEnabled:true];
   [theWindow setRootViewController:initalViewController];
   [self setWindow:theWindow];
   
@@ -55,7 +56,7 @@ NSString *docPath()
   
   insertButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
   [insertButton setFrame:buttonFrame];
-  
+  [insertButton setUserInteractionEnabled:YES];
   [insertButton addTarget:self action:@selector(addTask:) forControlEvents:(UIControlEventTouchUpInside)];
   
   [insertButton setTitle:@"Inset"
@@ -71,7 +72,18 @@ NSString *docPath()
   return YES;
 }
 
-
+- (void)addTask:(id)sender
+{
+  NSLog(@"TEST");
+  NSString *t = [taskField text];
+  if ([t isEqualToString:@""]){
+    return;
+  }
+  [tasks addObject:t];
+  [taskTable reloadData];
+  [taskField setText:@""];
+  [taskField resignFirstResponder];
+}
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {
@@ -83,6 +95,7 @@ NSString *docPath()
 - (void)applicationDidEnterBackground:(UIApplication *)application {
   // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
   // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+  [tasks writeToFile:docPath() atomically:YES];
 }
 
 
@@ -98,6 +111,7 @@ NSString *docPath()
 
 - (void)applicationWillTerminate:(UIApplication *)application {
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+  [tasks writeToFile:docPath() atomically:YES];
 }
 
 
